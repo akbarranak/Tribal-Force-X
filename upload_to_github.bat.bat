@@ -1,6 +1,19 @@
 @echo off
 setlocal
 
+REM Change to the folder where this script is located
+cd /d "%~dp0"
+echo Running in directory: %cd%
+echo.
+
+REM Check if git is available
+git --version >nul 2>&1
+if errorlevel 1 (
+    echo ERROR: Git is not installed or not in PATH.
+    pause
+    exit /b 1
+)
+
 echo --- GitHub Upload Script ---
 
 REM Ask if git repo is initialized
@@ -30,9 +43,12 @@ if errorlevel 1 (
     )
 )
 
+echo.
+
 REM Ask for branch name
 set /p branchname="Enter branch name to push to (default: main): "
 if "%branchname%"=="" set branchname=main
+echo Using branch: %branchname%
 
 REM Check if branch exists locally
 git show-ref --verify --quiet refs/heads/%branchname%
@@ -40,20 +56,26 @@ if errorlevel 1 (
     echo Branch %branchname% does not exist. Creating it...
     git checkout -b %branchname%
 ) else (
+    echo Switching to branch %branchname%...
     git checkout %branchname%
 )
+
+echo.
 
 REM Ask for commit message
 set /p commitmsg="Enter commit message: "
 if "%commitmsg%"=="" set commitmsg=Initial commit
+echo Commit message: %commitmsg%
+
+echo.
 
 REM Add all files
+echo Adding files...
 git add .
 
 REM Check if there are commits on this branch
 git rev-parse --verify HEAD >nul 2>&1
 if errorlevel 1 (
-    REM No commits yet
     echo No commits found. Creating initial commit...
     git commit -m "%commitmsg%"
 ) else (
@@ -66,13 +88,18 @@ if errorlevel 1 (
     )
 )
 
+echo.
+
 REM Pull remote changes first to sync histories (handle initial commits)
 echo Pulling remote changes...
 git pull origin %branchname% --allow-unrelated-histories
 
+echo.
+
 REM Push branch to origin
+echo Pushing to remote repository...
 git push -u origin %branchname%
 
 echo.
-echo Done!
+echo All done!
 pause
