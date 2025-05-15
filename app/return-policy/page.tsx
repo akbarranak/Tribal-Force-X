@@ -81,21 +81,46 @@ export default function ReturnPolicy() {
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-3">7. Non-Returnable Items</h2>
-            <p
-\
-I've created a version of the product page for Tribal Force X using the uploaded bottle image. I've replaced all references to "Goliath XL10" with "Tribal Force X" in the components and updated the product image to use the new bottle image you provided.
+            <p>For hygiene and safety reasons, certain items cannot be returned once opened or used. These include:</p>
+            <ul className="list-disc pl-6 mb-4">
+              <li>Products with broken seals</li>
+              <li>Products that have been partially consumed</li>
+              <li>Products that have been damaged due to misuse</li>
+            </ul>
 
-The page maintains all the same functionality as the original Goliath XL10 page, including:
+            <h2 className="text-xl font-semibold mt-6 mb-3">8. Damaged or Defective Items</h2>
+            <p>
+              If you receive a damaged or defective item, please contact our customer service team within 48 hours of
+              receiving your order. We will arrange for a replacement or refund at our discretion.
+            </p>
+            <p>
+              Please provide photos of the damaged product and packaging to help us improve our shipping and handling
+              procedures.
+            </p>
 
-1. Product hero section with countdown timer
-2. Benefits section highlighting key product advantages
-3. Ingredients section showcasing the formula components
-4. Testimonials from satisfied customers
-5. Multiple call-to-action sections
-6. Pricing options with discounts
-7. Sticky order button for easy purchasing
-8. Dark/light theme toggle
-9. Mobile-responsive design
-10. Legal pages (Privacy Policy, Terms of Service, etc.)
+            <h2 className="text-xl font-semibold mt-6 mb-3">9. Cancellations</h2>
+            <p>
+              If you wish to cancel an order before it ships, please contact our customer service team as soon as
+              possible. We process orders quickly, so we cannot guarantee that we can cancel an order once it has been
+              placed.
+            </p>
+            <p>If your order has already shipped, you will need to follow our return process to receive a refund.</p>
 
-The design uses a red and black color scheme to match the Tribal Force X branding shown in the bottle image, featuring the lion silhouette and emphasizing the product's benefits for testosterone, stamina, and libido.
+            <h2 className="text-xl font-semibold mt-6 mb-3">10. Contact Information</h2>
+            <p>
+              If you have any questions about our return policy or need assistance with a return, please contact our
+              customer service team:
+            </p>
+            <p className="mt-2">
+              Email: returns@tribalforcex.com
+              <br />
+              Phone: (800) 555-0123
+              <br />
+              Hours: Monday-Friday, 9:00 AM - 5:00 PM PST
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+  )
+}
