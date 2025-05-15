@@ -34,17 +34,39 @@ REM Ask for branch name
 set /p branchname="Enter branch name to push to (default: main): "
 if "%branchname%"=="" set branchname=main
 
+REM Check if branch exists locally
+git show-ref --verify --quiet refs/heads/%branchname%
+if errorlevel 1 (
+    echo Branch %branchname% does not exist. Creating it...
+    git checkout -b %branchname%
+) else (
+    git checkout %branchname%
+)
+
 REM Ask for commit message
 set /p commitmsg="Enter commit message: "
-if "%commitmsg%"=="" set commitmsg=Update files
+if "%commitmsg%"=="" set commitmsg=Initial commit
 
 REM Add all files
 git add .
 
-REM Commit
-git commit -m "%commitmsg%"
+REM Check if there are commits on this branch
+git rev-parse --verify HEAD >nul 2>&1
+if errorlevel 1 (
+    REM No commits yet
+    echo No commits found. Creating initial commit...
+    git commit -m "%commitmsg%"
+) else (
+    REM Check if there are changes staged
+    git diff --cached --quiet
+    if errorlevel 1 (
+        git commit -m "%commitmsg%"
+    ) else (
+        echo No changes to commit.
+    )
+)
 
-REM Push
+REM Push branch to origin
 git push -u origin %branchname%
 
 echo.
