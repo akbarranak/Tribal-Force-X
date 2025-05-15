@@ -66,6 +66,10 @@ if errorlevel 1 (
     )
 )
 
+REM Pull remote changes first to sync histories (handle initial commits)
+echo Pulling remote changes...
+git pull origin %branchname% --allow-unrelated-histories
+
 REM Push branch to origin
 git push -u origin %branchname%
 
